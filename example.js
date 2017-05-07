@@ -10,19 +10,68 @@ var Schema = require('mongoose').Schema;
 var baseDao=mongodao.baseDao;
 var url='mongodb://123.207.221.15/test';
 baseDao.connect(url);
-var userDao = {
+var userDTO = {
     dBname:"user",
     schema:new Schema({
         username: String,
         password: String
     })
-}; //  定义了一个新的模型，但是此模式还未和users集合有关联
+};
+var userDao=baseDao.init(userDTO);
+
+//function for add a docment
 var user = {
-    username:"xiaoming5",
-    password:"abcd6"
+    username:"admin",
+    password:"123456"
 }
-var entryDao=baseDao.init(userDao);
-entryDao.create(user,function(u){
-    console.log(u);
+userDao.create(user,function(doc){
+    console.log(doc);
 });
+
+//funtion for query one
+var queryUser={
+    username:"admin"
+}
+userDao.findOne(queryUser,function(doc){
+    console.log(doc);
+})
+
+//funtion for query list
+var queryUser={
+    username:"admin"
+}
+userDao.find(queryUser,function(docs){
+    console.log(docs);
+})
+
+//function for DELETE
+var queryUser={
+    username:"admin"
+}
+userDao.remove(queryUser,function(e){
+    console.log(e);
+})
+
+//function for update
+var queryUser={
+    username:"admin",
+}
+var updateUser={
+    password:"123456"
+}
+userDao.findOneAndUpdate(queryUser,updateUser,function(e){
+    console.log(e);
+})
+
+//function for count
+var queryUser={
+    username:"admin",
+}
+
+userDao.count(queryUser,function(e){
+    console.log(e);
+})
+
+
+
 baseDao.disconnect();
