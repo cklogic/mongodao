@@ -1,6 +1,6 @@
 {
   "name": "mongodao",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A package that connect MongoDB and operate",
   "main": "index.js",
   "scripts": {
